@@ -1,0 +1,58 @@
+1 - létrehoz: composer create-project laravel/laravel *név*
+2 - elérési út: "C:/xampp/htdocs/*egyikfolder*/*masikfolder*/public"
+3 - .env fájl szerkesztése DB_DATABASE=*név*, DATABASE=mysql
+4 - tábla létrehozása: php artisan make:migration create_*név*_table
+5 - database->migrations->2024... tábla alakítása $table->tipus('nev');
+6 - composer require laravel/breeze --dev
+7 - php artisan breeze:install
+8 - blade yes 1/0
+9 - npm install
+10 - npm run dev
+
+CRUDék
+	Modell/
+		-php artisan make:model *nev* --resource
+		-protected $table="*tablanev*";
+    		 protected $primaryKey="id";
+    		 protected $fillable=['omaz','nev','lakhely','szulido'];
+
+	Controller/
+		--php artisan make:controller *nev* --resource
+
+
+Index 
+-----
+
+Elérési utak: routes/web.php
+web.php -> use App\Http\Controllers\*controllernev*;
+*nevcontroller*.php -> use App\Models\*modelnev*;
+
+*nevcontroller*.php 
+-------------------
+public function index()
+    {
+        //
+        $adatok=TanulokModel::all();
+        dd($adatok);
+    }
+
+
+Adatok átadása nézetnek(MVC-model view controller):
+
+
+
+php artisan make:*factorynev* --model=*kinezetioldalnev*
+
+Faker magyar nyelvre-> vendor/src/Factory.php - - > public const DEFAULT_LOCALE = 'en_US'; - > 'hu_HU';
+
+Random adatok generálása:
+database/factories/*megadottfactorynev.php*
+
+return [
+	*adatbazisbaszereplonev* => $this()->faker->*ertek pl.name,date*(),
+];
+
+
+akkor fut ha a database/seeders/DatabaseSeeder.php-ba meg van hívva a faker
+
+a regisztráció kiiktatásához kommentelni kell a megfelelő sorokat
